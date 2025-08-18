@@ -21,7 +21,7 @@ public class PlanCategory {
     private String categoryName;
 
     @Column(name = "ACTIVE_STATUS",length = 15)
-    private String activeSW;
+    private String activeSW="active";
 
     @Column(name = "CREATED_DATE",updatable = false)
     @CreationTimestamp

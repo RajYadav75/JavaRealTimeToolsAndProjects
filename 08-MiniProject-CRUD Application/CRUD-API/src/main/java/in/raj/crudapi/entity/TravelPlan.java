@@ -29,7 +29,7 @@ public class TravelPlan {
     private Integer planCategoryId;
 
     @Column(name = "ACTIVE_STATUS",length = 20)
-    private String activateSW;
+    private String activateSW ="active";
 
     @Column(name = "CREATED_DATE",updatable = false)
     @CreationTimestamp
