@@ -19,5 +19,12 @@ public interface ITravelPlanMgmtService {
     //TODO-: For Edit Operation Form Launch(To Show the existing record for editing)
     TravelPlan showTravelPlanById(Integer id);
 
-    //TODO-:
+    //TODO-: For Edit operation Form Submission
+    String updateTravelPlan(TravelPlan travelPlan);
+
+    //TODO:- For Deletion Operation (Hard Deletion)
+    String deleteTravelPlan(Integer id);
+
+    //TODO:- Soft Deletion Operation Activity
+    String changeTravelPlanStatus(Integer planId, String status);
 }
