@@ -1,5 +1,7 @@
 package in.raj.crudapi.service.implementationClass;
 
+import in.raj.crudapi.config.AppConfig;
+import in.raj.crudapi.constants.TravelPlanConstrant;
 import in.raj.crudapi.entity.PlanCategory;
 import in.raj.crudapi.entity.TravelPlan;
 import in.raj.crudapi.repo.IPlanCategoryRepository;
@@ -19,12 +21,22 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
     private IPlanCategoryRepository planCategoryRepo;
     @Autowired
     private ITravelPlanRepository travelPlanRepo;
+    private Map<String,String> messages;
+
+    @Autowired
+    public TravelPlanMgmtServiceImpl(AppConfig appConfig) {
+        this.messages = appConfig.getMessages();
+    }
+
     @Override
     public String registerTravelPlan(TravelPlan travelPlan) {
         //TODO:- Save The Object
 
         TravelPlan saveTravelPlan = travelPlanRepo.save(travelPlan);
-        return saveTravelPlan.getId()!=null?"TravelPlan is registered successfully :: "+saveTravelPlan.getId():"TravelPlan already Not register";
+        //TODO:- Not Best Practice
+        //return saveTravelPlan.getId()!=null?"TravelPlan is registered successfully :: "+saveTravelPlan.getId():"TravelPlan already Not register";
+        //TODO:- For Best Practice
+        return saveTravelPlan.getId()!=null?messages.get(TravelPlanConstrant.SAVE_SUCCESS)+saveTravelPlan.getId():messages.get(TravelPlanConstrant.SAVE_FAILURE);
     }
 
     @Override
@@ -47,13 +59,17 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
     @Override
     public TravelPlan showTravelPlanById(Integer id) {
         //TODO:- First Way
+        //TODO:- Not Best Practice
         //return travelPlanRepo.findById(id).orElseThrow(()->new IllegalArgumentException("TravelPlan Not Found"));
+        //TODO:- For Best Practice
+//        return travelPlanRepo.findById(id).orElseThrow(()->new IllegalArgumentException(messages.get("find-by-id-failure")));
         //TODO:- Second Way
         Optional<TravelPlan> travelPlanId = travelPlanRepo.findById(id);
         if (travelPlanId.isPresent()){
             return travelPlanId.get();
         }else {
-            throw new IllegalArgumentException("TravelPlan Not Found");
+            //throw new IllegalArgumentException("TravelPlan Not Found");
+            throw new IllegalArgumentException(messages.get(TravelPlanConstrant.FIND_BY_ID_FAILURE));
         }
     }
 
@@ -63,10 +79,12 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
         if (getTravelPlan.isPresent()){
             //save the object
             travelPlanRepo.save(travelPlan);
-            return "TravelPlan Updated Successfully"+travelPlan.getId();
+//            return "TravelPlan Updated Successfully"+travelPlan.getId();
+            return messages.get(TravelPlanConstrant.UPDATE_SUCCESS)+travelPlan.getId();
         }
         else{
-            throw new IllegalArgumentException("TravelPlan Not Found");
+//            throw new IllegalArgumentException("TravelPlan Not Found");
+            return messages.get(TravelPlanConstrant.UPDATE_FAILURE);
         }
     }
 
@@ -75,9 +93,11 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
         Optional<TravelPlan> getTravelPlanId = travelPlanRepo.findById(id);
         if (getTravelPlanId.isPresent()){
             travelPlanRepo.deleteById(id);
-            return "TravelPlan Deleted Successfully"+id;
+//            return "TravelPlan Deleted Successfully"+id;
+            return messages.get(TravelPlanConstrant.DELETE_SUCCESS)+id;
         }else{
-            throw new IllegalArgumentException("TravelPlan Not Found :: "+id);
+            //throw new IllegalArgumentException("TravelPlan Not Found :: "+id);
+            return messages.get(TravelPlanConstrant.DELETE_FAILURE)+id;
         }
     }
 
@@ -88,9 +108,11 @@ public class TravelPlanMgmtServiceImpl implements ITravelPlanMgmtService {
             TravelPlan travelPlan = getTravelPlanById.get();
             travelPlan.setActivateSW(status);
             travelPlanRepo.save(travelPlan);
-            return "TravelPlan Changed Successfully"+planId;
+//            return "TravelPlan Changed Successfully"+planId;
+            return messages.get(TravelPlanConstrant.STATUS_CHANGE_SUCCESS)+planId;
         }else{
-            throw new IllegalArgumentException("TravelPlan Not Found for updation :: "+planId);
+//            throw new IllegalArgumentException("TravelPlan Not Found for updation :: "+planId);
+           return messages.get(TravelPlanConstrant.STATUS_CHANGE_FAILURE)+planId;
         }
     }
 
