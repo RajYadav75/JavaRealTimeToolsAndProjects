@@ -15,12 +15,12 @@ spring:
 plan:
   module:
     messages:
-      save-success:Travel Plan is saved with id value
-      save-failure:Travel Plan is not saved with id value
-      find-by-id-failure:Travel Plan is not fount
-      update-success:Travel Plan is updated
-      update-failure:Travel Plan is not found for updation
-      delete-success:Travel Plan is deleted 
-      delete-failure:Travel Plan is not found for deletion
-      status-change-success:Travel Plan Status is changed
-      status-change-failure:Travel Plan is not found for Status change
+      save-success: "Travel Plan is saved with id value"
+      save-failure: "Travel Plan is not saved with id value"
+      find-by-id-failure: "Travel Plan is not found"
+      update-success: "Travel Plan is updated"
+      update-failure: "Travel Plan is not found for updation"
+      delete-success: "Travel Plan is deleted"
+      delete-failure: "Travel Plan is not found for deletion"
+      status-change-success: "Travel Plan Status is changed"
+      status-change-failure: "Travel Plan is not found for Status change"
