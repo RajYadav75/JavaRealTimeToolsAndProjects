@@ -1,0 +1,15 @@
+server:
+    port: 4041
+spring:
+    application:
+        name: Report-Generation-API
+    datasource:
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        password: root
+        url: jdbc:mysql:///ReportApiDB
+        username: root
+    jpa:
+        database-platform: org.mysql.dialect.MySQLDialect
+        hibernate:
+            ddl-auto: update
+        show-sql: true
