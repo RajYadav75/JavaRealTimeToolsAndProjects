@@ -9,7 +9,7 @@ spring:
         url: jdbc:mysql:///ReportApiDB
         username: root
     jpa:
-        database-platform: org.mysql.dialect.MySQLDialect
+        database-platform: org.hibernate.dialect.MySQLDialect
         hibernate:
             ddl-auto: update
         show-sql: true
