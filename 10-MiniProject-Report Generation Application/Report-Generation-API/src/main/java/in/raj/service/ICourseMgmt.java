@@ -14,6 +14,9 @@ public interface ICourseMgmt {
     Set<String> showAllFaculties();
     List<SearchResults> showCoursesByFilters(SearchInputs inputs);
 
-    void generatePDFReport(SearchInputs inputs, HttpServletResponse response);
-    void generateExcelReport(SearchInputs inputs, HttpServletResponse response);
+    void generatePDFReport(SearchInputs inputs, HttpServletResponse response) throws Exception;
+    void generateExcelReport(SearchInputs inputs, HttpServletResponse response)throws Exception;
+
+    void generatePdfReportAllData(HttpServletResponse  res)throws Exception;
+    void generateExcelReportAllData(HttpServletResponse  res)throws Exception;
 }
