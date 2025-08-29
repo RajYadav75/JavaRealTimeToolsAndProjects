@@ -28,7 +28,7 @@ import java.util.Set;
         version = "1.0",
         description = "Reporting API supporting File Download operations",
         license = @License(name = "NARESH IT", url = "http://raj.com"),
-        contact = @Contact(url = "http://gigantic-server.com", name = "Raj", email = "Raj@gigagantic-server.com")
+        contact = @Contact(url = "http://13.49.102.254:8115", name = "Raj", email = "Raj@gigagantic-server.com")
 )
 )
 public class ReportGenerateRestController {
