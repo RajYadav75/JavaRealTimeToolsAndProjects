@@ -20,34 +20,34 @@ public class ReportGenerateRestController {
 
     @GetMapping("/courses")
     public ResponseEntity<?> fetchCourseCategories() {
-        try{
+        try {
             //TODO:- Use Service
             Set<String> courseInfo = courseService.showAllCourseCategories();
             return new ResponseEntity<Set<String>>(courseInfo, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<String>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<String>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/trainingMode")
     public ResponseEntity<?> fetchTrainingMode() {
-        try{
+        try {
             //TODO:- Use Service
             Set<String> allTrainingModes = courseService.showAllTrainingModes();
             return new ResponseEntity<>(allTrainingModes, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/faculties")
     public ResponseEntity<?> fetchFaculties() {
-        try{
+        try {
             //TODO-: Use Service
             Set<String> allFaculties = courseService.showAllFaculties();
             return new ResponseEntity<>(allFaculties, HttpStatus.OK);
-        }catch(Exception e){
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -58,7 +58,7 @@ public class ReportGenerateRestController {
             List<SearchResults> searchResultsList = courseService.showCoursesByFilters(searchInputs);
             return new ResponseEntity<>(searchResultsList, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(e.getMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -70,7 +70,7 @@ public class ReportGenerateRestController {
             //TODO:- Set the content-disposition header  to  response content  going to browser as downloadable file
             response.setHeader("Content-Disposition", "attachment; filename=courses.pdf");
             //TODO:- Use the services
-            courseService.generatePDFReport(searchInputs,response);
+            courseService.generatePDFReport(searchInputs, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -84,38 +84,36 @@ public class ReportGenerateRestController {
             //TODO:- Set the content-disposition header  to  response content  going to browser as downloadable file
             response.setHeader("Content-Disposition", "attachment; filename=courses.xls");
             //TODO:- Use the services
-            courseService.generateExcelReport(searchInputs,response);
+            courseService.generateExcelReport(searchInputs, response);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @GetMapping("/allPdfReport")
-    public  void  showPdfReportAllData(HttpServletResponse  res){
+    public void showPdfReportAllData(HttpServletResponse res) {
         try {
             //TODO:-set the response content type
             res.setContentType("application/pdf");
             //TODO:- set the content-disposition header  to  response content  going to browser as downloadable file
-            res.setHeader("Content-Disposition","attachment;fileName=courses.pdf");
+            res.setHeader("Content-Disposition", "attachment;fileName=courses.pdf");
             //TODO:-use service
             courseService.generatePdfReportAllData(res);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @GetMapping("/allExcelReport")
-    public  void  showExcelReportAllData(HttpServletResponse  res){
+    public void showExcelReportAllData(HttpServletResponse res) {
         try {
             //TODO:-set the response content type
             res.setContentType("application/vnd.ms-excel");
             //TODO:-set the content-disposition header  to  response content  going to browser as downloadable file
-            res.setHeader("Content-Disposition","attachment;fileName=courses.xls");
+            res.setHeader("Content-Disposition", "attachment;fileName=courses.xls");
             //TODO:-use the service
             courseService.generateExcelReportAllData(res);
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
