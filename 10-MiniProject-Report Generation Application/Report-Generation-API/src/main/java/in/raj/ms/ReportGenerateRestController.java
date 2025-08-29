@@ -3,6 +3,14 @@ package in.raj.ms;
 import in.raj.model.SearchInputs;
 import in.raj.model.SearchResults;
 import in.raj.service.ICourseMgmt;
+import io.swagger.v3.oas.annotations.OpenAPIDefinition;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.info.Contact;
+import io.swagger.v3.oas.annotations.info.Info;
+import io.swagger.v3.oas.annotations.info.License;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,9 +22,24 @@ import java.util.Set;
 
 @RestController
 @RequestMapping("/reporting-api")
+@OpenAPIDefinition(info =
+@Info(
+        title = "Reporting API",
+        version = "1.0",
+        description = "Reporting API supporting File Download operations",
+        license = @License(name = "NARESH IT", url = "http://raj.com"),
+        contact = @Contact(url = "http://gigantic-server.com", name = "Raj", email = "Raj@gigagantic-server.com")
+)
+)
 public class ReportGenerateRestController {
     @Autowired
     private ICourseMgmt courseService;
+    @Operation(summary = "Get Courses Information",
+            responses = {
+                    @ApiResponse(description = "coursesInfo",
+                            content = @Content(mediaType = "application/json",
+                                    schema = @Schema(implementation = String.class))),
+                    @ApiResponse(responseCode = "500", description = "Wrong url")})
 
     @GetMapping("/courses")
     public ResponseEntity<?> fetchCourseCategories() {
